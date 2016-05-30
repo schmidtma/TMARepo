@@ -1,0 +1,123 @@
+#McWeeney Lab
+#Version 1.1 May 2016
+
+library(OptimalCutpoints)
+eddyhnscc<-read.table(file="EddyTMASmokerHNSCC.txt", sep="\t", header=TRUE)
+
+#Determine optimal cut point for each marker 
+#tag.healthy should match coding for status
+#As specified gives equal weight to sensitivity and specificity
+#Use Generalized Youden Index in Control.cutpoints if want different weights 
+
+#ROC and optimal cut point analysis for Eddy TMA data in HNSCC patients based on HPV status and no covariates
+#no covariates
+#double negative
+optimal.cutpoint.YoudenDblNeg<-optimal.cutpoints(X = "median_dbl_neg_pct", status = "HPVStatus", tag.healthy = 0, methods = "Youden", data = eddyhnscc, pop.prev = NULL, control = control.cutpoints(), ci.fit = TRUE, conf.level = 0.95, trace = FALSE)
+
+#prints out Youden cutoff and AUC
+print(optimal.cutpoint.YoudenDblNeg)
+
+#cd44
+optimal.cutpoint.Youdencd44<-optimal.cutpoints(X = "median_cd44_pct", status = "HPVStatus", tag.healthy = 0, methods = "Youden", data = eddyhnscc, pop.prev = NULL, control = control.cutpoints(), ci.fit = TRUE, conf.level = 0.95, trace = FALSE)
+#prints out Youden cutoff and AUC
+print(optimal.cutpoint.Youdencd44)
+
+#double positive
+optimal.cutpoint.YoudenDblpos<-optimal.cutpoints(X = "median_dbl_pos_pct", status = "HPVStatus", tag.healthy = 0, methods = "Youden", data = eddyhnscc, pop.prev = NULL, control = control.cutpoints(), ci.fit = TRUE, conf.level = 0.95, trace = FALSE)
+#prints out Youden cutoff and AUC
+print(optimal.cutpoint.YoudenDblpos)
+
+#cd166
+optimal.cutpoint.Youdencd166<-optimal.cutpoints(X = "median_cd166_pct", status = "HPVStatus", tag.healthy = 0, methods = "Youden", data = eddyhnscc, pop.prev = NULL, control = control.cutpoints(), ci.fit = TRUE, conf.level = 0.95, trace = FALSE)
+#prints out Youden cutoff and AUC
+print(optimal.cutpoint.Youdencd166)
+
+#prints out Sensitivity, specificity, PPV, and NPV
+summary(optimal.cutpoint.Youdencd166)
+summary(optimal.cutpoint.YoudenDblpos)
+summary(optimal.cutpoint.Youdencd44)
+summary(optimal.cutpoint.YoudenDblNeg)
+
+
+#note variables are re-used for subsequent analyses
+#create new variables if you want to keep the results of prior analyses
+rm(optimal.cutpoint.Youdencd166)
+rm(optimal.cutpoint.YoudenDblpos)
+rm(optimal.cutpoint.Youdencd44)
+rm(optimal.cutpoint.YoudenDblNeg)
+
+
+
+###########################################################
+#ROC and optimal cut point analysis for Eddy TMA data in HNSCC patients based on HPV status and stage as covariates
+#stage as covariate
+#double negative
+optimal.cutpoint.YoudenDblNeg<-optimal.cutpoints(X = "median_dbl_neg_pct", status = "HPVStatus", tag.healthy = 0, methods = "Youden", data = eddyhnscc, pop.prev = NULL, categorical.cov =
+"Stage", control = control.cutpoints(), ci.fit = TRUE, conf.level = 0.95, trace = FALSE)
+print(optimal.cutpoint.YoudenDblNeg)
+
+#cd44
+optimal.cutpoint.Youdencd44<-optimal.cutpoints(X = "median_cd44_pct", status = "HPVStatus", tag.healthy = 0, methods = "Youden", data = eddyhnscc, pop.prev = NULL, categorical.cov =
+"Stage",control = control.cutpoints(), ci.fit = TRUE, conf.level = 0.95, trace = FALSE)
+print(optimal.cutpoint.Youdencd44)
+
+#double positive
+optimal.cutpoint.YoudenDblpos<-optimal.cutpoints(X = "median_dbl_pos_pct", status = "HPVStatus", tag.healthy = 0, methods = "Youden", data = eddyhnscc, pop.prev = NULL, categorical.cov =
+"Stage", control = control.cutpoints(), ci.fit = TRUE, conf.level = 0.95, trace = FALSE)
+print(optimal.cutpoint.YoudenDblpos)
+
+#cd166
+optimal.cutpoint.Youdencd166<-optimal.cutpoints(X = "median_cd166_pct", status = "HPVStatus", tag.healthy = 0, methods = "Youden", data = eddyhnscc, pop.prev = NULL, categorical.cov =
+"Stage",control = control.cutpoints(), ci.fit = TRUE, conf.level = 0.95, trace = FALSE)
+print(optimal.cutpoint.Youdencd166)
+
+summary(optimal.cutpoint.Youdencd166)
+summary(optimal.cutpoint.YoudenDblpos)
+summary(optimal.cutpoint.Youdencd44)
+summary(optimal.cutpoint.YoudenDblNeg)
+
+#note variables are re-used for subsequent analyses
+#create new variables if you want to keep the results of prior analyses
+rm(optimal.cutpoint.Youdencd166)
+rm(optimal.cutpoint.YoudenDblpos)
+rm(optimal.cutpoint.Youdencd44)
+rm(optimal.cutpoint.YoudenDblNeg)
+
+#################################################
+#Determine optimal cut point for each marker 
+#tag.healthy should match coding for status
+#smoke status as covariate
+
+#double negative
+optimal.cutpoint.YoudenDblNeg<-optimal.cutpoints(X = "median_dbl_neg_pct", status = "HPVStatus", tag.healthy = 0, methods = "Youden", data = eddyhnscc, pop.prev = NULL, categorical.cov =
+"SmokeStatus", control = control.cutpoints(), ci.fit = TRUE, conf.level = 0.95, trace = FALSE)
+print(optimal.cutpoint.YoudenDblNeg)
+
+#cd44
+optimal.cutpoint.Youdencd44<-optimal.cutpoints(X = "median_cd44_pct", status = "HPVStatus", tag.healthy = 0, methods = "Youden", data = eddyhnscc, pop.prev = NULL, categorical.cov =
+"SmokeStatus", control = control.cutpoints(), ci.fit = TRUE, conf.level = 0.95, trace = FALSE)
+print(optimal.cutpoint.Youdencd44)
+
+#double positive
+optimal.cutpoint.YoudenDblpos<-optimal.cutpoints(X = "median_dbl_pos_pct", status = "HPVStatus", tag.healthy = 0, methods = "Youden", data = eddyhnscc, pop.prev = NULL, categorical.cov =
+"SmokeStatus", control = control.cutpoints(), ci.fit = TRUE, conf.level = 0.95, trace = FALSE)
+print(optimal.cutpoint.YoudenDblpos)
+
+#cd166
+optimal.cutpoint.Youdencd166<-optimal.cutpoints(X = "median_cd166_pct", status = "HPVStatus", tag.healthy = 0, methods = "Youden", data = eddyhnscc, pop.prev = NULL, categorical.cov =
+"SmokeStatus", control = control.cutpoints(), ci.fit = TRUE, conf.level = 0.95, trace = FALSE)
+print(optimal.cutpoint.Youdencd166)
+
+
+#Review each print statement 
+#Summary and plots based on inspection of results 
+
+summary(optimal.cutpoint.Youdencd166)
+summary(optimal.cutpoint.YoudenDblpos)
+summary(optimal.cutpoint.Youdencd44)
+summary(optimal.cutpoint.YoudenDblNeg)
+
+
+boxplot(median_cd166_pct~SmokeStatus*HPVStatus, data=eddyhnscc, xlab="SmokingStatus by HPV Status (HPV+=1)", ylab="Cd166Pct")
+
+plot(optimal.cutpoint.Youdencd166, legend = FALSE)

@@ -1,0 +1,587 @@
+CellProfiler Pipeline: http://www.cellprofiler.org
+Version:3
+DateRevision:20140723174500
+GitHash:6c2d896
+ModuleCount:26
+HasImagePlaneDetails:False
+
+Images:[module_num:1|svn_version:\'Unknown\'|variable_revision_number:2|show_window:False|notes:\x5B\'To begin creating your project, use the Images module to compile a list of files and/or folders that you want to analyze. You can also specify a set of rules to include only the desired files in your selected folders.\'\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    :
+    Filter images?:No filtering
+    Select the rule criteria:and (file does containregexp "\\\\\\\\{6\x5B6\x5D\x5B4\x5D}")
+
+Metadata:[module_num:2|svn_version:\'Unknown\'|variable_revision_number:4|show_window:False|notes:\x5B\'The Metadata module optionally allows you to extract information describing your images (i.e, metadata) which will be stored along with your measurements. This information can be contained in the file name and/or location, or in an external file.\'\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Extract metadata?:Yes
+    Metadata data type:Text
+    Metadata types:{}
+    Extraction method count:3
+    Metadata extraction method:Extract from file/folder names
+    Metadata source:Folder name
+    Regular expression:.*\\\\\\\\(?P<Color>\x5BBlueRdCKGrn\x5D+)
+    Regular expression:.*\\\\\\\\(?P<Color>\x5BBlueRdCKGrn\x5D+)
+    Extract metadata from:All images
+    Select the filtering criteria:and (file does contain "")
+    Metadata file location:
+    Match file and image metadata:\x5B\x5D
+    Use case insensitive matching?:No
+    Metadata extraction method:Extract from file/folder names
+    Metadata source:File name
+    Regular expression:^.*\\\\{(?P<ImageN>\x5B0-9\x5D+)\\\\}
+    Regular expression:(?P<Date>\x5B0-9\x5D{4}_\x5B0-9\x5D{2}_\x5B0-9\x5D{2})$
+    Extract metadata from:All images
+    Select the filtering criteria:and (file does contain "")
+    Metadata file location:
+    Match file and image metadata:\x5B\x5D
+    Use case insensitive matching?:No
+    Metadata extraction method:Import from file
+    Metadata source:File name
+    Regular expression:^(?P<Plate>.*)_(?P<Well>\x5BA-P\x5D\x5B0-9\x5D{2})_s(?P<Site>\x5B0-9\x5D)_w(?P<ChannelNumber>\x5B0-9\x5D)
+    Regular expression:(?P<Date>\x5B0-9\x5D{4}_\x5B0-9\x5D{2}_\x5B0-9\x5D{2})$
+    Extract metadata from:All images
+    Select the filtering criteria:and (file does contain "")
+    Metadata file location:E\x3A\\\\Cell Profiler\\\\20150825 Images for Full Spot Analysis\\\\FullCores.csv
+    Match file and image metadata:\x5B{\'Image Metadata\'\x3A u\'ImageN\', \'CSV Metadata\'\x3A u\'PARENT_REGION_ID\'}\x5D
+    Use case insensitive matching?:No
+
+NamesAndTypes:[module_num:3|svn_version:\'Unknown\'|variable_revision_number:5|show_window:False|notes:\x5B\'The NamesAndTypes module allows you to assign a meaningful name to each image by which other modules will refer to it.\'\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Assign a name to:Images matching rules
+    Select the image type:Grayscale image
+    Name to assign these images:DNA
+    Match metadata:\x5B{u\'CK\'\x3A u\'ImageN\', u\'DAPI\'\x3A u\'ImageN\', u\'CD98\'\x3A u\'ImageN\', u\'CD166\'\x3A u\'ImageN\'}\x5D
+    Image set matching method:Metadata
+    Set intensity range from:Image metadata
+    Assignments count:4
+    Single images count:0
+    Select the rule criteria:and (metadata does Color "Blue")
+    Name to assign these images:DAPI
+    Name to assign these objects:Cell
+    Select the image type:Grayscale image
+    Set intensity range from:Image metadata
+    Retain outlines of loaded objects?:No
+    Name the outline image:LoadedOutlines
+    Select the rule criteria:and (metadata does Color "CK")
+    Name to assign these images:CK
+    Name to assign these objects:Nucleus
+    Select the image type:Grayscale image
+    Set intensity range from:Image metadata
+    Retain outlines of loaded objects?:No
+    Name the outline image:LoadedOutlines
+    Select the rule criteria:and (metadata does Color "Green")
+    Name to assign these images:CD98
+    Name to assign these objects:Cytoplasm
+    Select the image type:Grayscale image
+    Set intensity range from:Image metadata
+    Retain outlines of loaded objects?:No
+    Name the outline image:LoadedOutlines
+    Select the rule criteria:and (metadata does Color "Red")
+    Name to assign these images:CD166
+    Name to assign these objects:Speckle
+    Select the image type:Grayscale image
+    Set intensity range from:Image metadata
+    Retain outlines of loaded objects?:No
+    Name the outline image:LoadedOutlines
+
+Groups:[module_num:4|svn_version:\'Unknown\'|variable_revision_number:2|show_window:False|notes:\x5B\'The Groups module optionally allows you to split your list of images into image subsets (groups) which will be processed independently of each other. Examples of groupings include screening batches, microtiter plates, time-lapse movies, etc.\'\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Do you want to group your images?:Yes
+    grouping metadata count:2
+    Metadata category:X_INDEX
+    Metadata category:Y_INDEX
+
+IdentifyPrimaryObjects:[module_num:5|svn_version:\'Unknown\'|variable_revision_number:10|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:DAPI
+    Name the primary objects to be identified:Nuclei
+    Typical diameter of objects, in pixel units (Min,Max):12,110
+    Discard objects outside the diameter range?:Yes
+    Try to merge too small objects with nearby larger objects?:No
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Laplacian of Gaussian
+    Method to draw dividing lines between clumped objects:Intensity
+    Size of smoothing filter:5
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:No
+    Name the outline image:PrimaryOutlines
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:No
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Retain outlines of the identified objects?:Yes
+    Automatically calculate the threshold using the Otsu method?:Yes
+    Enter Laplacian of Gaussian threshold:0.5
+    Automatically calculate the size of objects for the Laplacian of Gaussian filter?:Yes
+    Enter LoG filter diameter:5.0
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Threshold setting version:1
+    Threshold strategy:Adaptive
+    Thresholding method:Otsu
+    Select the smoothing method for thresholding:Automatic
+    Threshold smoothing scale:1.0
+    Threshold correction factor:0.60
+    Lower and upper bounds on threshold:0.01,1
+    Approximate fraction of image covered by objects?:0.01
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Select binary image:None
+    Masking objects:None
+    Two-class or three-class thresholding?:Three classes
+    Minimize the weighted variance or the entropy?:Weighted variance
+    Assign pixels in the middle intensity class to the foreground or the background?:Background
+    Method to calculate adaptive window size:Image size
+    Size of adaptive window:10
+
+IdentifyPrimaryObjects:[module_num:6|svn_version:\'Unknown\'|variable_revision_number:10|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:True]
+    Select the input image:CD166
+    Name the primary objects to be identified:CD166Pos
+    Typical diameter of objects, in pixel units (Min,Max):20,70
+    Discard objects outside the diameter range?:Yes
+    Try to merge too small objects with nearby larger objects?:No
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Intensity
+    Method to draw dividing lines between clumped objects:Intensity
+    Size of smoothing filter:6
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Name the outline image:PrimaryOutlines
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Retain outlines of the identified objects?:No
+    Automatically calculate the threshold using the Otsu method?:Yes
+    Enter Laplacian of Gaussian threshold:0.5
+    Automatically calculate the size of objects for the Laplacian of Gaussian filter?:Yes
+    Enter LoG filter diameter:5.0
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Threshold setting version:1
+    Threshold strategy:Global
+    Thresholding method:Otsu
+    Select the smoothing method for thresholding:Automatic
+    Threshold smoothing scale:1.0
+    Threshold correction factor:.8
+    Lower and upper bounds on threshold:0.01,1.0
+    Approximate fraction of image covered by objects?:0.01
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Select binary image:None
+    Masking objects:None
+    Two-class or three-class thresholding?:Three classes
+    Minimize the weighted variance or the entropy?:Weighted variance
+    Assign pixels in the middle intensity class to the foreground or the background?:Background
+    Method to calculate adaptive window size:Image size
+    Size of adaptive window:10
+
+IdentifyPrimaryObjects:[module_num:7|svn_version:\'Unknown\'|variable_revision_number:10|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:True]
+    Select the input image:CK
+    Name the primary objects to be identified:CKPos
+    Typical diameter of objects, in pixel units (Min,Max):20,70
+    Discard objects outside the diameter range?:Yes
+    Try to merge too small objects with nearby larger objects?:No
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Intensity
+    Method to draw dividing lines between clumped objects:Propagate
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Name the outline image:PrimaryOutlines
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Retain outlines of the identified objects?:No
+    Automatically calculate the threshold using the Otsu method?:Yes
+    Enter Laplacian of Gaussian threshold:0.5
+    Automatically calculate the size of objects for the Laplacian of Gaussian filter?:Yes
+    Enter LoG filter diameter:5.0
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Threshold setting version:1
+    Threshold strategy:Global
+    Thresholding method:Otsu
+    Select the smoothing method for thresholding:Automatic
+    Threshold smoothing scale:1.0
+    Threshold correction factor:1
+    Lower and upper bounds on threshold:0.01,1.0
+    Approximate fraction of image covered by objects?:0.01
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Select binary image:None
+    Masking objects:None
+    Two-class or three-class thresholding?:Two classes
+    Minimize the weighted variance or the entropy?:Weighted variance
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Method to calculate adaptive window size:Image size
+    Size of adaptive window:10
+
+IdentifyPrimaryObjects:[module_num:8|svn_version:\'Unknown\'|variable_revision_number:10|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:CD98
+    Name the primary objects to be identified:CD98Pos
+    Typical diameter of objects, in pixel units (Min,Max):20,70
+    Discard objects outside the diameter range?:Yes
+    Try to merge too small objects with nearby larger objects?:No
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Intensity
+    Method to draw dividing lines between clumped objects:Intensity
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Name the outline image:PrimaryOutlines
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Retain outlines of the identified objects?:No
+    Automatically calculate the threshold using the Otsu method?:Yes
+    Enter Laplacian of Gaussian threshold:0.5
+    Automatically calculate the size of objects for the Laplacian of Gaussian filter?:Yes
+    Enter LoG filter diameter:5.0
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Threshold setting version:1
+    Threshold strategy:Global
+    Thresholding method:Otsu
+    Select the smoothing method for thresholding:Automatic
+    Threshold smoothing scale:1.0
+    Threshold correction factor:.875
+    Lower and upper bounds on threshold:0.03,1.0
+    Approximate fraction of image covered by objects?:0.01
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Select binary image:None
+    Masking objects:None
+    Two-class or three-class thresholding?:Three classes
+    Minimize the weighted variance or the entropy?:Weighted variance
+    Assign pixels in the middle intensity class to the foreground or the background?:Background
+    Method to calculate adaptive window size:Image size
+    Size of adaptive window:10
+
+MaskObjects:[module_num:9|svn_version:\'Unknown\'|variable_revision_number:2|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:True]
+    Select objects to be masked:Nuclei
+    Name the masked objects:CKWithNuclei
+    Mask using a region defined by other objects or by binary image?:Objects
+    Select the masking object:CKPos
+    Select the masking image:None
+    Handling of objects that are partially masked:Keep overlapping region
+    Fraction of object that must overlap:0.5
+    Numbering of resulting objects:Renumber
+    Retain outlines of the resulting objects?:No
+    Name the outline image:MaskedOutlines
+    Invert the mask?:No
+
+MaskObjects:[module_num:10|svn_version:\'Unknown\'|variable_revision_number:2|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Select objects to be masked:Nuclei
+    Name the masked objects:CD166WithNuclei
+    Mask using a region defined by other objects or by binary image?:Objects
+    Select the masking object:CD166Pos
+    Select the masking image:None
+    Handling of objects that are partially masked:Keep overlapping region
+    Fraction of object that must overlap:0.5
+    Numbering of resulting objects:Renumber
+    Retain outlines of the resulting objects?:No
+    Name the outline image:MaskedOutlines
+    Invert the mask?:No
+
+MaskObjects:[module_num:11|svn_version:\'Unknown\'|variable_revision_number:2|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Select objects to be masked:Nuclei
+    Name the masked objects:CD98WithNuclei
+    Mask using a region defined by other objects or by binary image?:Objects
+    Select the masking object:CD98Pos
+    Select the masking image:None
+    Handling of objects that are partially masked:Keep overlapping region
+    Fraction of object that must overlap:0.5
+    Numbering of resulting objects:Renumber
+    Retain outlines of the resulting objects?:No
+    Name the outline image:MaskedOutlines
+    Invert the mask?:No
+
+IdentifySecondaryObjects:[module_num:12|svn_version:\'Unknown\'|variable_revision_number:9|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input objects:CD166WithNuclei
+    Name the objects to be identified:CD166PosCells
+    Select the method to identify the secondary objects:Propagation
+    Select the input image:CD166
+    Number of pixels by which to expand the primary objects:10
+    Regularization factor:.01
+    Name the outline image:CD166Outlines
+    Retain outlines of the identified secondary objects?:Yes
+    Discard secondary objects touching the border of the image?:No
+    Discard the associated primary objects?:No
+    Name the new primary objects:FilteredNuclei
+    Retain outlines of the new primary objects?:No
+    Name the new primary object outlines:FilteredNucleiOutlines
+    Fill holes in identified objects?:Yes
+    Threshold setting version:1
+    Threshold strategy:Adaptive
+    Thresholding method:Otsu
+    Select the smoothing method for thresholding:No smoothing
+    Threshold smoothing scale:1.0
+    Threshold correction factor:1
+    Lower and upper bounds on threshold:0.0,1.0
+    Approximate fraction of image covered by objects?:0.01
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Select binary image:None
+    Masking objects:None
+    Two-class or three-class thresholding?:Two classes
+    Minimize the weighted variance or the entropy?:Weighted variance
+    Assign pixels in the middle intensity class to the foreground or the background?:Background
+    Method to calculate adaptive window size:Image size
+    Size of adaptive window:10
+
+IdentifySecondaryObjects:[module_num:13|svn_version:\'Unknown\'|variable_revision_number:9|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input objects:CKWithNuclei
+    Name the objects to be identified:CKPosCells
+    Select the method to identify the secondary objects:Propagation
+    Select the input image:CK
+    Number of pixels by which to expand the primary objects:10
+    Regularization factor:0.05
+    Name the outline image:CKOutlines
+    Retain outlines of the identified secondary objects?:Yes
+    Discard secondary objects touching the border of the image?:No
+    Discard the associated primary objects?:No
+    Name the new primary objects:FilteredNuclei
+    Retain outlines of the new primary objects?:No
+    Name the new primary object outlines:FilteredNucleiOutlines
+    Fill holes in identified objects?:Yes
+    Threshold setting version:1
+    Threshold strategy:Global
+    Thresholding method:Otsu
+    Select the smoothing method for thresholding:No smoothing
+    Threshold smoothing scale:1.0
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.1,1.0
+    Approximate fraction of image covered by objects?:0.01
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Select binary image:None
+    Masking objects:None
+    Two-class or three-class thresholding?:Two classes
+    Minimize the weighted variance or the entropy?:Weighted variance
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Method to calculate adaptive window size:Image size
+    Size of adaptive window:10
+
+IdentifySecondaryObjects:[module_num:14|svn_version:\'Unknown\'|variable_revision_number:9|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input objects:CD98WithNuclei
+    Name the objects to be identified:CD98PosCells
+    Select the method to identify the secondary objects:Propagation
+    Select the input image:CD98
+    Number of pixels by which to expand the primary objects:10
+    Regularization factor:0.05
+    Name the outline image:CD44Outlines
+    Retain outlines of the identified secondary objects?:Yes
+    Discard secondary objects touching the border of the image?:No
+    Discard the associated primary objects?:No
+    Name the new primary objects:FilteredNuclei
+    Retain outlines of the new primary objects?:No
+    Name the new primary object outlines:FilteredNucleiOutlines
+    Fill holes in identified objects?:Yes
+    Threshold setting version:1
+    Threshold strategy:Global
+    Thresholding method:Otsu
+    Select the smoothing method for thresholding:No smoothing
+    Threshold smoothing scale:1.0
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.045,1.0
+    Approximate fraction of image covered by objects?:0.01
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Select binary image:None
+    Masking objects:None
+    Two-class or three-class thresholding?:Three classes
+    Minimize the weighted variance or the entropy?:Weighted variance
+    Assign pixels in the middle intensity class to the foreground or the background?:Background
+    Method to calculate adaptive window size:Image size
+    Size of adaptive window:10
+
+RelateObjects:[module_num:15|svn_version:\'Unknown\'|variable_revision_number:2|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:True]
+    Select the input child objects:CD166PosCells
+    Select the input parent objects:CKPosCells
+    Calculate child-parent distances?:None
+    Calculate per-parent means for all child measurements?:No
+    Calculate distances to other parents?:No
+    Parent name:None
+
+RelateObjects:[module_num:16|svn_version:\'Unknown\'|variable_revision_number:2|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input child objects:CD98PosCells
+    Select the input parent objects:CKPosCells
+    Calculate child-parent distances?:None
+    Calculate per-parent means for all child measurements?:No
+    Calculate distances to other parents?:No
+    Parent name:None
+
+RelateObjects:[module_num:17|svn_version:\'Unknown\'|variable_revision_number:2|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input child objects:CD98PosCells
+    Select the input parent objects:CD166PosCells
+    Calculate child-parent distances?:None
+    Calculate per-parent means for all child measurements?:No
+    Calculate distances to other parents?:No
+    Parent name:None
+
+ClassifyObjects:[module_num:18|svn_version:\'Unknown\'|variable_revision_number:2|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Make each classification decision on how many measurements?:Pair of measurements
+    Hidden:1
+    Select the object to be classified:CKPosCells
+    Select the measurement to classify by:Children_CKWithNuclei
+    Select bin spacing:Evenly spaced bins
+    Number of bins:3
+    Lower threshold:0.0
+    Use a bin for objects below the threshold?:No
+    Upper threshold:1.0
+    Use a bin for objects above the threshold?:No
+    Enter the custom thresholds separating the values between bins:0,1
+    Give each bin a name?:No
+    Enter the bin names separated by commas:None
+    Retain an image of the classified objects?:No
+    Name the output image:ClassifiedNuclei
+    Select the object name:CKPosCells
+    Select the first measurement:Children_CD166PosCells_Count
+    Method to select the cutoff:Custom
+    Enter the cutoff value:1
+    Select the second measurement:Children_CD98PosCells_Count
+    Method to select the cutoff:Custom
+    Enter the cutoff value:1
+    Use custom names for the bins?:Yes
+    Enter the low-low bin name:CKPos_CD166Neg_CD98Neg
+    Enter the low-high bin name:CKPos_CD166Neg_CD98Pos
+    Enter the high-low bin name:CKPos_CD166Pos_CD98Neg
+    Enter the high-high bin name:CKPos_CD166Pos_CD98Pos
+    Retain an image of the classified objects?:Yes
+    Enter the image name:CKPosCells_categories
+
+MeasureObjectNeighbors:[module_num:19|svn_version:\'Unknown\'|variable_revision_number:2|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:False|wants_pause:False]
+    Select objects to measure:CD166PosCells
+    Select neighboring objects to measure:CD44PosCells
+    Method to determine neighbors:Adjacent
+    Neighbor distance:15
+    Retain the image of objects colored by numbers of neighbors?:Yes
+    Name the output image:CD166Pos_CD44Pos_Neighbors
+    Select colormap:Default
+    Retain the image of objects colored by percent of touching pixels?:No
+    Name the output image:PercentTouching
+    Select a colormap:Default
+
+MeasureObjectSizeShape:[module_num:20|svn_version:\'Unknown\'|variable_revision_number:1|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:False|wants_pause:False]
+    Select objects to measure:CD166PosCells
+    Select objects to measure:CD98PosCells
+    Select objects to measure:CKWithNuclei
+    Select objects to measure:CKPosCells
+    Calculate the Zernike features?:Yes
+
+MeasureObjectIntensity:[module_num:21|svn_version:\'Unknown\'|variable_revision_number:3|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:False|wants_pause:False]
+    Hidden:1
+    Select an image to measure:None
+    Select objects to measure:None
+
+CalculateMath:[module_num:22|svn_version:\'Unknown\'|variable_revision_number:2|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:False|wants_pause:False]
+    Name the output measurement:Measurement
+    Operation:Multiply
+    Select the first operand measurement type:Object
+    Select the first operand objects:CD166PosCells
+    Select the first operand measurement:Number_Object_Number
+    Multiply the above operand by:1.0
+    Raise the power of above operand by:1.0
+    Select the second operand measurement type:Object
+    Select the second operand objects:CKPosCells
+    Select the second operand measurement:Number_Object_Number
+    Multiply the above operand by:1.0
+    Raise the power of above operand by:1.0
+    Take log10 of result?:No
+    Multiply the result by:100.0
+    Raise the power of result by:1.0
+    Add to the result:0.0
+    Constrain the result to a lower bound?:No
+    Enter the lower bound:0.0
+    Constrain the result to an upper bound?:No
+    Enter the upper bound:1.0
+
+OverlayOutlines:[module_num:23|svn_version:\'Unknown\'|variable_revision_number:3|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Display outlines on a blank image?:No
+    Select image on which to display outlines:DAPI
+    Name the output image:Object_overlay
+    Outline display mode:Color
+    Select method to determine brightness of outlines:Max of image
+    Width of outlines:1
+    Select outlines to display:None
+    Select outline color:#FF2B2B
+    Load outlines from an image or objects?:Objects
+    Select objects to display:CD166PosCells
+    Select outlines to display:None
+    Select outline color:#FF00EC
+    Load outlines from an image or objects?:Objects
+    Select objects to display:CKPosCells
+    Select outlines to display:None
+    Select outline color:#26FF00
+    Load outlines from an image or objects?:Objects
+    Select objects to display:CD98PosCells
+    Select outlines to display:None
+    Select outline color:#88F9FF
+    Load outlines from an image or objects?:Objects
+    Select objects to display:Nuclei
+
+SaveImages:[module_num:24|svn_version:\'Unknown\'|variable_revision_number:11|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Select the type of image to save:Image
+    Select the image to save:CKPosCells_categories
+    Select the objects to save:None
+    Select the module display window to save:None
+    Select method for constructing file names:From image filename
+    Select image name for file prefix:CK
+    Enter single file name:OrigBlue
+    Number of digits:4
+    Append a suffix to the image file name?:No
+    Text to append to the image name:
+    Saved file format:tif
+    Output file location:Elsewhere...\x7CE\x3A\\\\\\\\Cell Profiler\\\\\\\\20150825 Images for Full Spot Analysis\\\\\\\\Outputs from 20150825 Images\\\\\\\\Colocalization
+    Image bit depth:8
+    Overwrite existing files without warning?:Yes
+    When to save:Every cycle
+    Rescale the images? :No
+    Save as grayscale or color image?:Grayscale
+    Select colormap:gray
+    Record the file and path information to the saved image?:No
+    Create subfolders in the output folder?:No
+    Base image folder:Elsewhere...\x7C
+    Saved movie format:avi
+
+SaveImages:[module_num:25|svn_version:\'Unknown\'|variable_revision_number:11|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Select the type of image to save:Image
+    Select the image to save:Object_overlay
+    Select the objects to save:None
+    Select the module display window to save:None
+    Select method for constructing file names:From image filename
+    Select image name for file prefix:DAPI
+    Enter single file name:OrigBlue
+    Number of digits:4
+    Append a suffix to the image file name?:No
+    Text to append to the image name:
+    Saved file format:tif
+    Output file location:Elsewhere...\x7CE\x3A\\\\\\\\Cell Profiler\\\\\\\\20150825 Images for Full Spot Analysis\\\\\\\\Outputs from 20150825 Images\\\\\\\\Overlay
+    Image bit depth:8
+    Overwrite existing files without warning?:Yes
+    When to save:Every cycle
+    Rescale the images? :No
+    Save as grayscale or color image?:Grayscale
+    Select colormap:Default
+    Record the file and path information to the saved image?:No
+    Create subfolders in the output folder?:No
+    Base image folder:Elsewhere...\x7C
+    Saved movie format:avi
+
+ExportToSpreadsheet:[module_num:26|svn_version:\'Unknown\'|variable_revision_number:11|show_window:True|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True|wants_pause:False]
+    Select the column delimiter:Comma (",")
+    Add image metadata columns to your object data file?:Yes
+    Limit output to a size that is allowed in Excel?:No
+    Select the measurements to export:Yes
+    Calculate the per-image mean values for object measurements?:Yes
+    Calculate the per-image median values for object measurements?:Yes
+    Calculate the per-image standard deviation values for object measurements?:Yes
+    Output file location:Elsewhere...\x7CE\x3A\\\\\\\\Cell Profiler\\\\\\\\20150825 Images for Full Spot Analysis\\\\\\\\Outputs from 20150825 Images
+    Create a GenePattern GCT file?:Yes
+    Select source of sample row name:Metadata
+    Select the image to use as the identifier:None
+    Select the metadata to use as the identifier:Metadata_Series
+    Export all measurement types?:Yes
+    Press button to select measurements to export:CD98WithNuclei\x7CLocation_Center_Y,CD98WithNuclei\x7CLocation_Center_X,CD98WithNuclei\x7CNumber_Object_Number,CD98WithNuclei\x7CParent_Nuclei,CD98WithNuclei\x7CChildren_CD98PosCells_Count,CD166PosCells\x7CChildren_CD98PosCells_Count,CD166PosCells\x7CLocation_Center_Y,CD166PosCells\x7CLocation_Center_X,CD166PosCells\x7CParent_CKPosCells,CD166PosCells\x7CParent_CD166WithNuclei,CD166PosCells\x7CNumber_Object_Number,CKWithNuclei\x7CLocation_Center_Y,CKWithNuclei\x7CLocation_Center_X,CKWithNuclei\x7CChildren_CKPosCells_Count,CKWithNuclei\x7CParent_Nuclei,CKWithNuclei\x7CNumber_Object_Number,Image\x7CCount_CKWithNuclei,Image\x7CCount_CD166PosCells,Image\x7CCount_CD166WithNuclei,Image\x7CCount_CD98WithNuclei,Image\x7CCount_CKPos,Image\x7CCount_CD98Pos,Image\x7CCount_CD166Pos,Image\x7CCount_CKPosCells,Image\x7CCount_Nuclei,Image\x7CCount_CD98PosCells,Image\x7CWidth_CK,Image\x7CWidth_DAPI,Image\x7CWidth_CD98,Image\x7CWidth_CD166,Image\x7CURL_DAPI,Image\x7CURL_CK,Image\x7CURL_CD98,Image\x7CURL_CD166,Image\x7CSeries_DAPI,Image\x7CSeries_CK,Image\x7CSeries_CD98,Image\x7CSeries_CD166,Image\x7CFrame_DAPI,Image\x7CFrame_CK,Image\x7CFrame_CD98,Image\x7CFrame_CD166,Image\x7CMD5Digest_CK,Image\x7CMD5Digest_DAPI,Image\x7CMD5Digest_CD98,Image\x7CMD5Digest_CD166,Image\x7CExecutionTime_03NamesAndTypes,Image\x7CExecutionTime_04Groups,Image\x7CExecutionTime_07IdentifyPrimaryObjects,Image\x7CExecutionTime_02Metadata,Image\x7CExecutionTime_01Images,Image\x7CExecutionTime_11MaskObjects,Image\x7CExecutionTime_08IdentifyPrimaryObjects,Image\x7CHeight_DAPI,Image\x7CHeight_CK,Image\x7CHeight_CD98,Image\x7CHeight_CD166,Image\x7CScaling_DAPI,Image\x7CScaling_CK,Image\x7CScaling_CD98,Image\x7CScaling_CD166,Image\x7CModuleError_03NamesAndTypes,Image\x7CModuleError_04Groups,Image\x7CModuleError_07IdentifyPrimaryObjects,Image\x7CModuleError_02Metadata,Image\x7CModuleError_01Images,Image\x7CModuleError_11MaskObjects,Image\x7CModuleError_08IdentifyPrimaryObjects,Image\x7CPathName_DAPI,Image\x7CPathName_CK,Image\x7CPathName_CD98,Image\x7CPathName_CD166,Image\x7CThreshold_OrigThreshold_CD166PosCells,Image\x7CThreshold_OrigThreshold_CKPos,Image\x7CThreshold_OrigThreshold_CD98Pos,Image\x7CThreshold_OrigThreshold_CD166Pos,Image\x7CThreshold_OrigThreshold_CKPosCells,Image\x7CThreshold_OrigThreshold_Nuclei,Image\x7CThreshold_OrigThreshold_CD98PosCells,Image\x7CThreshold_SumOfEntropies_CD166PosCells,Image\x7CThreshold_SumOfEntropies_CKPos,Image\x7CThreshold_SumOfEntropies_CD98Pos,Image\x7CThreshold_SumOfEntropies_CD166Pos,Image\x7CThreshold_SumOfEntropies_CKPosCells,Image\x7CThreshold_SumOfEntropies_Nuclei,Image\x7CThreshold_SumOfEntropies_CD98PosCells,Image\x7CThreshold_WeightedVariance_CD166PosCells,Image\x7CThreshold_WeightedVariance_CKPos,Image\x7CThreshold_WeightedVariance_CD98Pos,Image\x7CThreshold_WeightedVariance_CD166Pos,Image\x7CThreshold_WeightedVariance_CKPosCells,Image\x7CThreshold_WeightedVariance_Nuclei,Image\x7CThreshold_WeightedVariance_CD98PosCells,Image\x7CThreshold_FinalThreshold_CD166PosCells,Image\x7CThreshold_FinalThreshold_CKPos,Image\x7CThreshold_FinalThreshold_CD98Pos,Image\x7CThreshold_FinalThreshold_CD166Pos,Image\x7CThreshold_FinalThreshold_CKPosCells,Image\x7CThreshold_FinalThreshold_Nuclei,Image\x7CThreshold_FinalThreshold_CD98PosCells,Image\x7CGroup_Index,Image\x7CGroup_Number,Image\x7CFileName_CK,Image\x7CFileName_DAPI,Image\x7CFileName_CD98,Image\x7CFileName_CD166,Image\x7CClassify_CKPos_CD166Neg_CD98Pos_NumObjectsPerBin,Image\x7CClassify_CKPos_CD166Neg_CD98Pos_PctObjectsPerBin,Image\x7CClassify_CKPos_CD166Neg_CD98Neg_NumObjectsPerBin,Image\x7CClassify_CKPos_CD166Neg_CD98Neg_PctObjectsPerBin,Image\x7CClassify_CKPos_CD166Pos_CD98Pos_NumObjectsPerBin,Image\x7CClassify_CKPos_CD166Pos_CD98Pos_PctObjectsPerBin,Image\x7CClassify_CKPos_CD166Pos_CD98Neg_NumObjectsPerBin,Image\x7CClassify_CKPos_CD166Pos_CD98Neg_PctObjectsPerBin,Image\x7CMetadata_DIAMETER,Image\x7CMetadata_Y,Image\x7CMetadata_Y_INDEX,Image\x7CMetadata_SUBMAPNAME,Image\x7CMetadata_CERTAINTY,Image\x7CMetadata_SIZEX,Image\x7CMetadata_SIZEY,Image\x7CMetadata_K2,Image\x7CMetadata_K1,Image\x7CMetadata_X,Image\x7CMetadata_X_INDEX,Image\x7CMetadata_REPORT,Image\x7CMetadata_DONOR,Image\x7CMetadata_Counterstain_Intensity,Image\x7CMetadata_Counterstain_Area,Image\x7CMetadata_COMMENT,Image\x7CMetadata_PEPTIDE_CONCENTRATION,Image\x7CMetadata_Pearsons_signals_1_3,Image\x7CMetadata_Pearsons_signals_1_2,Image\x7CMetadata_Pearsons_signals_1_4,Image\x7CMetadata_Pearsons_signals_3_4,Image\x7CMetadata_Pearsons_signals_2_3,Image\x7CMetadata_Pearsons_signals_2_4,Image\x7CMetadata_ELEMENTTYPE,Image\x7CMetadata_CLASS,Image\x7CMetadata_RECAPTURE,Image\x7CMetadata_ImageN,Image\x7CMetadata_FITC_20X_Score,Image\x7CMetadata_FITC_20X_Area,Image\x7CMetadata_Region_Number,Image\x7CMetadata_SCALEX,Image\x7CMetadata_SCALEY,Image\x7CMetadata_SLIDEMAP_PATH,Image\x7CMetadata_EFCOORD,Image\x7CMetadata_OBJECTIVE,Image\x7CMetadata_INPUT_REGION_LENGTH,Image\x7CMetadata_INPUT_REGION_AREA,Image\x7CMetadata_Z,Image\x7CMetadata_DESCRIPTION,Image\x7CMetadata_FileLocation,Image\x7CMetadata_MEASUREDDIAMETER,Image\x7CMetadata_Color,Image\x7CMetadata_Series,Image\x7CMetadata_Frame,Image\x7CMetadata_MEASUREDAREA,Image\x7CMetadata_ELEMENTID,Image\x7CMetadata_FOCUSAT,Image\x7CMetadata_Y3_ET_20X_Score,Image\x7CMetadata_Y3_ET_20X_Area,Image\x7CMetadata_Y5_ET_20X_Score,Image\x7CMetadata_Y5_ET_20X_Area,Image\x7CMetadata_Image,CD98Pos\x7CNumber_Object_Number,CD98Pos\x7CLocation_Center_Y,CD98Pos\x7CLocation_Center_X,CD166WithNuclei\x7CChildren_CD166PosCells_Count,CD166WithNuclei\x7CLocation_Center_Y,CD166WithNuclei\x7CLocation_Center_X,CD166WithNuclei\x7CParent_Nuclei,CD166WithNuclei\x7CNumber_Object_Number,CKPos\x7CLocation_Center_Y,CKPos\x7CLocation_Center_X,CKPos\x7CNumber_Object_Number,Experiment\x7CPipeline_Pipeline,Experiment\x7CRun_Timestamp,Experiment\x7CCellProfiler_Version,Experiment\x7CModification_Timestamp,Experiment\x7CMetadata_GroupingTags,CD166Pos\x7CLocation_Center_Y,CD166Pos\x7CLocation_Center_X,CD166Pos\x7CNumber_Object_Number,CKPosCells\x7CParent_CKWithNuclei,CKPosCells\x7CNumber_Object_Number,CKPosCells\x7CLocation_Center_Y,CKPosCells\x7CLocation_Center_X,CKPosCells\x7CChildren_CD166PosCells_Count,CKPosCells\x7CChildren_CD98PosCells_Count,CKPosCells\x7CClassify_CKPos_CD166Neg_CD98Pos,CKPosCells\x7CClassify_CKPos_CD166Neg_CD98Neg,CKPosCells\x7CClassify_CKPos_CD166Pos_CD98Pos,CKPosCells\x7CClassify_CKPos_CD166Pos_CD98Neg,Nuclei\x7CNumber_Object_Number,Nuclei\x7CChildren_CD98WithNuclei_Count,Nuclei\x7CChildren_CD166WithNuclei_Count,Nuclei\x7CChildren_CKWithNuclei_Count,Nuclei\x7CLocation_Center_Y,Nuclei\x7CLocation_Center_X,CD98PosCells\x7CLocation_Center_Y,CD98PosCells\x7CLocation_Center_X,CD98PosCells\x7CParent_CD98WithNuclei,CD98PosCells\x7CParent_CD166PosCells,CD98PosCells\x7CParent_CKPosCells,CD98PosCells\x7CNumber_Object_Number
+    Representation of Nan/Inf:Null
+    Add a prefix to file names?:Yes
+    Filename prefix\x3A:MyExpt_
+    Overwrite without warning?:Yes
+    Data to export:Do not use
+    Combine these object measurements with those of the previous object?:No
+    File name:DATA.csv
+    Use the object name for the file name?:Yes

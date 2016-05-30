@@ -1,0 +1,49 @@
+Core #,Donor Block ID,MRN,Age,HPV,pTNM,Stage,Tobacco,Smoker
+1,sur13-14937 b5,6625194,61,-,T2N0,II,never smoker,-
+2,sur13-00203 d8,6380941,73,-,T3N0,III,"former smoker, 60 pack-years",+
+3,sur12-02123 a5,6469521,65,-,T3N0,III,"former smoker, 28 pack-years",+
+4,sur11-16899 c2,1561034,70,-,T2N2a,IV,"former smoker, 25 pack-years",+
+5,sur11-10120 a6,6413818,42,-,T2N2a,IV,never smoker,-
+6,sur11-08914 l5,6407820,62,-,T2N0,II,"former smoker, 32 pack-years",+
+7,sur11-03445 a3,1352680,55,-,T1N2b,IV,"former smoker, 8 pack-years",-
+8,sur13-11090 a2,6369617,86,-,T1N0,I,"former smoker, 36 pack-years",+
+9,sur11-03136 a7,1397204,58,-,T2N2b,IV,"current smoker, 40 pack-years",+
+10,sur12-01126 a3,784962,62,-,T1N0,I,never smoker,-
+11,sur11-07049 a3,6320048,54,-,T2N0,II,"former smoker, 18 pack-years",+
+12,sur10-04646 a6,739058,61,-,T2N1,III,"current smoker, 30 pack-years",+
+13,sur13-18486 a3,1959865,79,-,T2N0,II,"former smoker, 35 pack-years",+
+14,sur13-10875 e2,6606108,65,-,T2N0,II,"former smoker, 24 pack-years",+
+15,sur13-10696 a2,6015730,66,-,T2N2a,IV,"former smoker, 3 pack-years",-
+16,sur13-06859 a1,6254322,66,-,T1N0,I,never smoker,-
+17,sur11-15578 a6,6440224,54,-,T2N0,II,"former smoker, 1 pack-years",-
+18,sur11-15191 f3,235448,59,-,T2N1,III,"former smoker, 70 pack-years",+
+19,sur10-16634 a3,1822613,55,-,T1N0,I,"current, 43 pack-years",+
+20,sur12-09189 a5,6505167,57,+,T2N0,II,never smoker,-
+21,sur11-14170 a5,6437604,65,+,T2N0,II,never smoker,-
+22,sur10-07435 b5,6307802,67,+,T1N0,I,"former smoker, 8 pack-years",-
+23,sur10-04647 a7,6295599,52,+,T2N0,II,"former smoker, 30 pack-years",+
+24,sur13-01373 a5,6557570,59,+,T2N0,II,"current smoker, 0.5 ppd (unknown duration)",?
+25,sur13-01333 b7,6558047,70,+,T1N0,I,never smoker,-
+26,sur11-10255 a5,6414554,52,+,T2N0,II,"former smoker, 25 pack-years",+
+27,sur11-12550 a7,6425682,56,+,T1N1,III,never smoker,-
+28,sur11-08770 b9,6047940,76,+,T1N1,III,"former smoker, 42 pack-years",+
+29,sur13-15916 a1,6630956,70,+,T2N0,II,"former smoker, 10 pack-years",-
+30,sur13-15713 a1,6486591,60,+,T1N1,III,"former smoker, 6 pack-years",-
+31,sur12-12919 b4,6521164,53,+,T1N1,III,never smoker,-
+32,sur12-09153 a2,444793,60,+,T1N1,III,"former smoker, 30 pack-years",+
+33,sur14-00523 i1,1904490,68,+,T1N2a,IV,"former smoker, 5 pack-years",-
+34,sur13-18994 a4,6642215,64,+,T1N3,IV,never smoker,-
+35,sur13-17265 b1,1143509,52,+,T2N2a,IV,"former smoker, 2 pack-years",-
+36,sur13-13535 d1,1720034,70,+,T1N2b,IV,never smoker,-
+37,sur13-09611 i1,6597646,66,+,T2N2c,IV,"former smoker, 5 pack-years",-
+38,sur12-14278 b3,1274436,75,+,T1N2b,IV,"former smoker, 60 pack-years",+
+39,1865,,control 1,,,,,?
+40,1826,,control 2,,,,,?
+41,1925,,control 3,,,,,?
+42,10038,,control 4,,,,,?
+43,1802,,control 5,,,,,?
+44,1841,,control 6,,,,,?
+45,10027,,control 7,,,,,?
+46,1492,,control 8,,,,,?
+47,1919,,control 9,,,,,?
+48,1816,,control 10,,,,,?
